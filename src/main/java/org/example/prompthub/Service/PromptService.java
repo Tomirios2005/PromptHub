@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 public class PromptService {
     private final PromptRepository repository;
     private final RestTemplate restTemplate;
-    private final ResponseRepository responseRepository;
+    private final ResponseService responseService;
     @Value("${groq.api.key}")
     private String apiKey;
     public List<PromptDTO> getPrompts() {
@@ -46,43 +46,29 @@ public class PromptService {
     public PromptDTO convertToDTO(Prompt prompt) {
         PromptDTO dto = new PromptDTO();
         dto.setId(prompt.getId());
-        dto.setTitle(prompt.getTitle());
-        dto.setCategory(prompt.getCategory());
         dto.setInputContext(prompt.getInputContext());
         dto.setCreatedAt(prompt.getCreatedAt());
 
         // Convertimos la lista de respuestas de Entidad a DTO
         if (prompt.getResponses() != null) {
             dto.setResponses(prompt.getResponses().stream()
-                    .map(this::convertResponseToDTO)
+                    .map(responseService::convertResponseToDTO)
                     .collect(Collectors.toList()));
         }
         return dto;
     }
     public PromptDTO createPrompt(PromptRequestDTO promptRequestDTO) {
         Prompt temp=new Prompt();
-        temp.setTitle(promptRequestDTO.getTitle());
-        temp.setCategory(promptRequestDTO.getCategory());
         temp.setInputContext(promptRequestDTO.getInputContext());
         repository.save(temp);
         return convertToDTO(temp);
     }
 
-    private PromptResponseDTO convertResponseToDTO(PromptResponse response) {
-        PromptResponseDTO resDto = new PromptResponseDTO();
-        resDto.setId(response.getId());
-        resDto.setModelName(response.getModelName());
-        resDto.setOutputContent(response.getOutputContent());
-        resDto.setRating(response.getRating());
-        resDto.setAnalysis(response.getAnalysis());
-        return resDto;
-    }
+
 
     public PromptDTO updatePrompt(Long id, PromptRequestDTO prompt) {
         try {
             Prompt tmp=this.repository.findById(id).orElseThrow();
-            tmp.setTitle(prompt.getTitle());
-            tmp.setCategory(prompt.getCategory());
             tmp.setInputContext(prompt.getInputContext());
             repository.save(tmp);
             return convertToDTO(tmp);
@@ -117,7 +103,7 @@ public class PromptService {
         // El repositorio de respuestas lo guarda en MySQL [cite: 29]
         //
         //
-        return convertResponseToDTO(responseRepository.save(response));
+        return responseService.saveResponse(response);
     }
 
     private String callExternalAI(String userPrompt, String model) {

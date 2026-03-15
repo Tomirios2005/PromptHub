@@ -10,6 +10,6 @@ public class PromptResponseDTO {
     private String outputContent;
     private Integer rating;      // Tu evaluación de 1 a 5 [cite: 12]
     private String analysis;     // Tu feedback detallado
-    private LocalDateTime createdAt;
+    private Long promptId;
 
 }

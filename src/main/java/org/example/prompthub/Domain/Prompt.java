@@ -17,14 +17,10 @@ public class Prompt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
+
 
     @Column(columnDefinition = "TEXT") // Para permitir textos largos
     private String inputContext;
-
-    private String category;
-
     private LocalDateTime createdAt;
 
     // Relación con las respuestas para comparar (Chain-of-thought)
