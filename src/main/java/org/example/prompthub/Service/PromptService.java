@@ -84,6 +84,18 @@ public class PromptService {
             return false;
         }
     }
+    public long exists(PromptRequestDTO prompt){
+        List<Prompt> prompts=repository.findAll();
+        for (Prompt p:prompts){
+            if (p.getInputContext()!=null&&prompt.getInputContext()!=null) {
+                if (p.getInputContext().equals(prompt.getInputContext())) {
+                    System.out.println("Prompt already exists");
+                    return p.getId();
+                }
+            }
+        }
+        return -1;
+    }
 
     public PromptResponseDTO getResponse(long id, String model) {
         Prompt prompt = repository.findById(id)

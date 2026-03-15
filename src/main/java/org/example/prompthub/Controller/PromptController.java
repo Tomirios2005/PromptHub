@@ -25,6 +25,10 @@ public class PromptController {
     }
     @PostMapping
     public PromptDTO createPrompt(@RequestBody PromptRequestDTO prompt){
+        long id=this.promptService.exists(prompt);
+        if (id!=-1){
+            return this.promptService.getPromptById(id);
+        }
         return this.promptService.createPrompt(prompt);
     }
     @PutMapping("/{id}")
