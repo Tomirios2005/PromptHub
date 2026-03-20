@@ -1,4 +1,4 @@
-import { usePrompts, type Prompt } from '../context/PromptsContext';
+import { usePrompts } from '../context/PromptsContext';
 import PromptCard from '../components/PromptCard';
 import { useEffect } from 'react';
 
