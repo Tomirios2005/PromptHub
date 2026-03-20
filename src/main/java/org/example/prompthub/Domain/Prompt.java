@@ -32,6 +32,7 @@ public class Prompt {
         this.createdAt = LocalDateTime.now();
     }
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
 
