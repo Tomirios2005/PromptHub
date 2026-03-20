@@ -43,8 +43,6 @@ public class ResponseService {
         resDto.setId(response.getId());
         resDto.setModelName(response.getModelName());
         resDto.setOutputContent(response.getOutputContent());
-        resDto.setRating(response.getRating());
-        resDto.setAnalysis(response.getAnalysis());
         resDto.setPromptId(response.getPrompt().getId());
         return resDto;
     }

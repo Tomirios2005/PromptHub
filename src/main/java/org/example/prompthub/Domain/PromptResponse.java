@@ -19,10 +19,6 @@ public class PromptResponse {
     private String modelName;
     @Column(columnDefinition = "TEXT")
     private String outputContent;
-    @Column
-    private int rating;
-    @Column(columnDefinition = "TEXT")
-    private String analysis;
     @ManyToOne
     @JoinColumn(name = "prompt_id")
     private Prompt prompt;

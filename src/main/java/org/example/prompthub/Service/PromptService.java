@@ -6,6 +6,7 @@ import org.example.prompthub.DTO.PromptRequestDTO;
 import org.example.prompthub.DTO.PromptResponseDTO;
 import org.example.prompthub.Domain.Prompt;
 import org.example.prompthub.Domain.PromptResponse;
+import org.example.prompthub.Domain.User;
 import org.example.prompthub.Repository.PromptRepository;
 import org.example.prompthub.Repository.ResponseRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,9 +58,10 @@ public class PromptService {
         }
         return dto;
     }
-    public PromptDTO createPrompt(PromptRequestDTO promptRequestDTO) {
+    public PromptDTO createPrompt(PromptRequestDTO promptRequestDTO, User user) {
         Prompt temp=new Prompt();
         temp.setInputContext(promptRequestDTO.getInputContext());
+        temp.setUser(user);
         repository.save(temp);
         return convertToDTO(temp);
     }
@@ -143,5 +145,25 @@ public class PromptService {
         } catch (Exception e) {
             return "Error al llamar a la IA: " + e.getMessage();
         }
+    }
+
+    public List<PromptDTO> findByUser(User user) {
+        List<Prompt> temp= this.repository.findByUser(user);
+        List<PromptDTO> prompts=new ArrayList<>();
+        for (Prompt p:temp){
+            prompts.add(convertToDTO(p));
+
+        }
+        return prompts;
+
+    }
+
+    public PromptDTO existsByPromptAndUser(PromptRequestDTO input, User user) {
+        Prompt tmp=this.repository.findByInputContextAndUser(input.getInputContext(), user);
+        if (tmp!=null) {
+            return convertToDTO(tmp);
+
+        }
+        return null;
     }
 }

@@ -5,7 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.prompthub.DTO.PromptDTO;
 import org.example.prompthub.DTO.PromptRequestDTO;
 import org.example.prompthub.DTO.PromptResponseDTO;
+import org.example.prompthub.Domain.User;
 import org.example.prompthub.Service.PromptService;
+import org.example.prompthub.Service.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,21 +18,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PromptController {
     private final PromptService promptService;
+    private final UserService userService;
     @GetMapping
-    public List<PromptDTO> getPrompts(){
-        return this.promptService.getPrompts();
-    }
+    public List<PromptDTO> getPrompts(Authentication authentication){
+        String email = (String) authentication.getPrincipal();
+        User user = userService.getUserByEmail(email);
+        return promptService.findByUser(user);    }
     @GetMapping("/{id}")
     public PromptDTO getPromptById(@PathVariable Long id){
         return this.promptService.getPromptById(id);
     }
     @PostMapping
-    public PromptDTO createPrompt(@RequestBody PromptRequestDTO prompt){
-        long id=this.promptService.exists(prompt);
-        if (id!=-1){
-            return this.promptService.getPromptById(id);
+    public PromptDTO createPrompt(@RequestBody PromptRequestDTO prompt, Authentication authentication){
+        String email = (String) authentication.getPrincipal();
+        User user = userService.getUserByEmail(email);
+        PromptDTO tmp=this.promptService.existsByPromptAndUser(prompt, user);
+        if (tmp!=null){
+            return tmp;
         }
-        return this.promptService.createPrompt(prompt);
+        return this.promptService.createPrompt(prompt, user);
     }
     @PutMapping("/{id}")
     public PromptDTO updatePrompt(@PathVariable long id, @RequestBody PromptRequestDTO prompt){

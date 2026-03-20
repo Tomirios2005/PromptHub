@@ -31,6 +31,9 @@ public class Prompt {
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
+    @ManyToOne
+    private User user;
+
 
     // Getters y Setters...
 }
