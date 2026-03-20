@@ -9,6 +9,12 @@ export default function AuthCallback() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const token = params.get('token')
+    const error=params.get('error')
+    if(error){
+      console.error('Error en autenticación:', error)
+      window.location.href = 'https://prompthub-hzvg.onrender.com/oauth2/authorization/google' // retry
+      return
+    }
     if (token) {
       login(token)       // guarda el token
       navigate('/')      // redirige al home
