@@ -13,7 +13,7 @@ const getHeaders = () => ({
 export const llmService = {
   /** Envía el prompt y devuelve el ID */
   async createPrompt(prompt: string): Promise<number> {
-    const res = await fetch(`${API_URL}/prompts`, {
+    const res = await fetch(`${API_URL}prompts`, {
       method: 'POST',
       headers: getHeaders(),
       body: JSON.stringify({ inputContext: prompt }),
@@ -29,7 +29,7 @@ export const llmService = {
     outputContent: string;
   }> {
     const res = await fetch(
-      `${API_URL}/prompts/${promptId}/generate?modelName=${encodeURIComponent(modelName)}`,
+      `${API_URL}prompts/${promptId}/generate?modelName=${encodeURIComponent(modelName)}`,
       { method: 'GET',
         headers: getHeaders()
         
@@ -41,7 +41,7 @@ export const llmService = {
   },
 
   async getPrompts() {
-    const res = await fetch(`${API_URL}/prompts`, { method: 'GET',
+    const res = await fetch(`${API_URL}prompts`, { method: 'GET',
       headers: getHeaders()
      });
     if (!res.ok) throw new Error('Error al obtener prompts');
