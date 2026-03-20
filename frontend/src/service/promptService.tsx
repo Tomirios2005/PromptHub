@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8080/api/';   // ← tu backend
+const API_URL = 'https://prompthub-hzvg.onrender.com';   // ← tu backend
 
 export interface CompareRequest {
   prompt: string;
