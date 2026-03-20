@@ -1,4 +1,4 @@
-const API_URL = 'https://prompthub-hzvg.onrender.com';   // ← tu backend
+const API_URL = 'https://prompthub-hzvg.onrender.com/api';   // ← tu backend
 
 export interface CompareRequest {
   prompt: string;
