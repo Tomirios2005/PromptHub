@@ -27,8 +27,12 @@ public class ResponseController {
 
     }
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable Long id){
-        return this.service.delete(id);
+    public boolean delete(@PathVariable Long id, Authentication authentication){
+        String email = (String) authentication.getPrincipal();
+        User user = userService.getUserByEmail(email);
+        if (user!=null)
+            return this.service.delete(id);
+        return false;
     }
 
 
