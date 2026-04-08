@@ -47,4 +47,5 @@ export const llmService = {
     if (!res.ok) throw new Error('Error al obtener prompts');
     return res.json();
   }
+  
 };
