@@ -40,12 +40,13 @@ export default function PromptCard({ prompts, onSubmit }: Props) {
           )}
           {responses &&
             responses.map(({ id, modelName, outputContent }) => (
+              
               <details
                 key={id}
                 className="mt-4 bg-gray-700 rounded-lg overflow-hidden"
               >
                 <summary className="cursor-pointer p-3 text-blue-400 font-medium hover:bg-gray-600 transition">
-                  {modelName}
+                  {modelName?? "Respuesta sin modelo"}
                 </summary>
 
                 <div className="p-3 border-t border-gray-600 text-gray-200">
