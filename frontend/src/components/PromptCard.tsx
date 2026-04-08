@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import { usePrompts, type Prompt } from "../context/PromptsContext";
 import { useNavigate } from "react-router-dom";
-import { deleteResponse } from "../service/promptService";
+import { llmService } from "../service/promptService";
 
 interface Props {
   prompts: Prompt[];
@@ -49,7 +49,7 @@ export default function PromptCard({ prompts, onSubmit }: Props) {
                 <summary className="cursor-pointer p-3 text-blue-400 font-medium hover:bg-gray-600 transition">
                   {modelName?? "Respuesta sin modelo"}
                   <button
-                    onClick={() => {deleteResponse(id);
+                    onClick={() => {llmService.deleteResponse(id);
                     }}
                   >
                     Delete
