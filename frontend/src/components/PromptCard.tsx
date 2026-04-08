@@ -48,13 +48,14 @@ export default function PromptCard({ prompts, onSubmit }: Props) {
               >
                 <summary className="cursor-pointer p-3 text-blue-400 font-medium hover:bg-gray-600 transition">
                   {modelName?? "Respuesta sin modelo"}
-                  <button
+                  
+                </summary>
+                <button
                     onClick={() => {llmService.deleteResponse(id);
                     }}
                   >
                     Delete
                   </button>
-                </summary>
 
                 <div className="p-3 border-t border-gray-600 text-gray-200">
                   {outputContent}
