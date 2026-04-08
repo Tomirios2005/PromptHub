@@ -46,6 +46,13 @@ export const llmService = {
      });
     if (!res.ok) throw new Error('Error al obtener prompts');
     return res.json();
+  },
+  async deleteResponse(id: number) {
+    const res = await fetch(`${API_URL}responses/${id}`, { method: 'DELETE',
+      headers: getHeaders()
+     });
+     if (!res.ok) throw new Error('Error al eliminar respuesta');
+      return res.json();
   }
   
 };

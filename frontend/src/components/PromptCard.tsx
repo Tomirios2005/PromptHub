@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import { usePrompts, type Prompt } from "../context/PromptsContext";
 import { useNavigate } from "react-router-dom";
+import { deleteResponse } from "../service/promptService";
 
 interface Props {
   prompts: Prompt[];
