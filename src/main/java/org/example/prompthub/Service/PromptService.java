@@ -112,6 +112,7 @@ public class PromptService {
                 .modelName(model)
                 .outputContent(aiOutput)
                 .prompt(prompt)
+                .user(prompt.getUser())
                 .build();
 
         // El repositorio de respuestas lo guarda en MySQL [cite: 29]

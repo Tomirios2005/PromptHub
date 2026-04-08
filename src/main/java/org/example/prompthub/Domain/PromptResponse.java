@@ -22,4 +22,7 @@ public class PromptResponse {
     @ManyToOne
     @JoinColumn(name = "prompt_id")
     private Prompt prompt;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
