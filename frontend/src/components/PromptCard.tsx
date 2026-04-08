@@ -24,16 +24,17 @@ export default function PromptCard({ prompts, onSubmit }: Props) {
         <div
           key={id}
           className="bg-gray-800 rounded-xl p-5 cursor-pointer hover:bg-gray-700 transition-colors"
-          onClick={() => {
+          
+        >
+          {inputContext && (
+            <div className="text-gray-100 prose prose-invert max-w-none"
+            onClick={() => {
             if (!inputContext) return;
             selectPrompt(inputContext);
             setCurrentPrompt(inputContext);
             onSubmit(inputContext);
             navigate("/");
-          }}
-        >
-          {inputContext && (
-            <div className="text-gray-100 prose prose-invert max-w-none">
+          }}>
               <ReactMarkdown>{inputContext}</ReactMarkdown>
             </div>
           )}
