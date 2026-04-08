@@ -16,7 +16,7 @@ export interface Prompt{
 }
 export interface PromptResponse {
     id: number;
-    model: string;
+    modelName: string;
     outputContent: string;
 }
 
