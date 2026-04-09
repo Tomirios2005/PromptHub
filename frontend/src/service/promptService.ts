@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8080/api/';   // ← tu backend
+const API_URL = 'https://prompthub-hzvg.onrender.com/api/';   // ← tu backend
 
 export interface CompareRequest {
   prompt: string;
@@ -46,5 +46,14 @@ export const llmService = {
      });
     if (!res.ok) throw new Error('Error al obtener prompts');
     return res.json();
+  },
+  async deleteResponse(responseId: number) {
+    const res = await fetch(`${API_URL}responses/${responseId}`, {
+      method: 'DELETE',
+      headers: getHeaders()
+    });
+    if (!res.ok) throw new Error('Error al eliminar respuesta');
   }
+  
+  
 };

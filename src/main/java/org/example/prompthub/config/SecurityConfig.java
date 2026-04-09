@@ -1,8 +1,10 @@
 package org.example.prompthub.config;
 
 import org.example.prompthub.security.JwtFilter;
+import org.example.prompthub.security.OAuth2FailureHandler;
 import org.example.prompthub.security.OAuth2SuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +27,10 @@ public class SecurityConfig {
 
     @Autowired
     private CorsConfigurationSource corsConfigurationSource; // 👈 inyectás el que ya existe
+    @Value("${app.frontend-url}")
+    private String frontendUrl;
+    @Autowired
+    private OAuth2FailureHandler failureHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,6 +50,7 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauth -> oauth
                         .successHandler(successHandler)
+                        .failureHandler(failureHandler)  // ← agregá esto
                 )
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
 

@@ -12,6 +12,12 @@ export interface Prompt{
     id: number;
     inputContext: string;
     createdAt?: string;
+    responses?: PromptResponse[];
+}
+export interface PromptResponse {
+    id: number;
+    modelName: string;
+    outputContent: string;
 }
 
 interface PromptsContextType {

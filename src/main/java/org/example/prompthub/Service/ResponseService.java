@@ -3,6 +3,7 @@ package org.example.prompthub.Service;
 import lombok.RequiredArgsConstructor;
 import org.example.prompthub.DTO.PromptResponseDTO;
 import org.example.prompthub.Domain.PromptResponse;
+import org.example.prompthub.Domain.User;
 import org.example.prompthub.Repository.ResponseRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ResponseService {
     private final ResponseRepository repository;
-    public List<PromptResponseDTO> getResponses(){
-        List<PromptResponse> responses = repository.findAll();
+    public List<PromptResponseDTO> getResponsesByUser(User user){
+        List<PromptResponse> responses = repository.findByUser(user);
         List<PromptResponseDTO> responseDTOS = new ArrayList<>();
         for (PromptResponse response : responses) {
             PromptResponseDTO responseDTO=convertResponseToDTO(response);
