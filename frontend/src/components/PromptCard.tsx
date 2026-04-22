@@ -3,6 +3,7 @@ import { usePrompts, type Prompt } from "../context/PromptsContext";
 import { useNavigate } from "react-router-dom";
 import { llmService } from "../service/promptService";
 import { useState } from "react";
+import { useEffect } from "react";
 
 interface Props {
   prompts: Prompt[];
@@ -14,6 +15,9 @@ export default function PromptCard({ prompts, onSubmit }: Props) {
   const { selectPrompt, setCurrentPrompt } = usePrompts();
 
   const [localPrompts, setLocalPrompts] = useState(prompts);
+  useEffect(() => {
+  setLocalPrompts(prompts);
+}, [prompts]);
 
   if (localPrompts.length === 0) return null;
 

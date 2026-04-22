@@ -7,9 +7,9 @@ export default function AllPrompts() {
     const { prompts, loadPrompts, handleSubmit } = usePrompts();
 
     useEffect(() => {
-        loadPrompts();
-    }, [prompts.length]);
-
+      loadPrompts();
+        console.log('Prompts cargados:', prompts);
+    }, []);
 
 
   return (
