@@ -99,17 +99,16 @@ public class PromptService {
         return -1;
     }
 
-    public PromptResponseDTO getResponse(long id, String model) {
+    public PromptResponseDTO getResponse(long id, String model, String reasoningEffort) {
         Prompt prompt = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Prompt no encontrado"));
 
-        // 2. Llamada lógica a la API (Simulación de la estructura de petición)
-        // Aquí usarías RestTemplate o WebClient para hacer el POST a https://api.openai.com/v1/chat/completions
-        String aiOutput = callExternalAI(prompt.getInputContext(), model);
+        String effort = normalizeEffort(reasoningEffort);
+        String aiOutput = callExternalAI(prompt.getInputContext(), model, effort);
+        String storedName = effort == null ? model : model + " (" + effort + ")";
 
-        // 3. Crear y guardar la entidad [cite: 27]
         PromptResponse response = PromptResponse.builder()
-                .modelName(model)
+                .modelName(storedName)
                 .outputContent(aiOutput)
                 .prompt(prompt)
                 .user(prompt.getUser())
@@ -121,7 +120,16 @@ public class PromptService {
         return responseService.saveResponse(response);
     }
 
-    private String callExternalAI(String userPrompt, String model) {
+    private String normalizeEffort(String reasoningEffort) {
+        if (reasoningEffort == null) return null;
+        String effort = reasoningEffort.trim().toLowerCase();
+        if (effort.equals("low") || effort.equals("medium") || effort.equals("high") || effort.equals("none")) {
+            return effort;
+        }
+        return null;
+    }
+
+    private String callExternalAI(String userPrompt, String model, String reasoningEffort) {
         String url = "https://api.groq.com/openai/v1/chat/completions";
 
         HttpHeaders headers = new HttpHeaders();
@@ -131,6 +139,9 @@ public class PromptService {
         Map<String, Object> body = new HashMap<>();
         body.put("model", model);
         body.put("messages", List.of(Map.of("role", "user", "content", userPrompt)));
+        if (reasoningEffort != null) {
+            body.put("reasoning_effort", reasoningEffort);
+        }
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
 

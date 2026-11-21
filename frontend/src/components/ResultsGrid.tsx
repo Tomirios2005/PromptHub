@@ -2,6 +2,7 @@
 
 interface ModelResult {
   model: string
+  label?: string
   response: string | null
   loading: boolean
   error: string | null
@@ -20,7 +21,7 @@ export default function ResultsGrid({ results }: Props) {
       {results.map(r => (
         <div key={r.model} className="min-w-0 overflow-hidden rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-6 shadow-xl shadow-slate-950/20">
           <div className="mb-4 flex items-start justify-between gap-3">
-            <h2 className="min-w-0 break-all font-mono text-sm uppercase tracking-wide text-cyan-300">{r.model}</h2>
+            <h2 className="min-w-0 break-words font-mono text-sm uppercase tracking-wide text-cyan-300">{r.label ?? r.model}</h2>
             {r.duration && <span className="shrink-0 rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-400">{r.duration}s</span>}
           </div>
 

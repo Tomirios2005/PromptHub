@@ -47,8 +47,8 @@ public class PromptController {
         return this.promptService.delete(id);
     }
     @GetMapping("/{id}/generate")
-    public PromptResponseDTO getResponse(@PathVariable long id, @RequestParam String modelName  ){
-        return this.promptService.getResponse(id, modelName);
+    public PromptResponseDTO getResponse(@PathVariable long id, @RequestParam String modelName, @RequestParam(required = false) String reasoningEffort){
+        return this.promptService.getResponse(id, modelName, reasoningEffort);
     }
 
 
