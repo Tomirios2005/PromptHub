@@ -25,11 +25,12 @@ export const llmService = {
   },
 
   /** Genera respuesta de UN modelo */
-  async generateForModel(promptId: number, modelName: string): Promise<{
+  async generateForModel(promptId: number, modelName: string, reasoningEffort?: string): Promise<{
     outputContent: string;
   }> {
+    const effort = reasoningEffort ? `&reasoningEffort=${encodeURIComponent(reasoningEffort)}` : ''
     const res = await fetch(
-      `${API_URL}prompts/${promptId}/generate?modelName=${encodeURIComponent(modelName)}`,
+      `${API_URL}prompts/${promptId}/generate?modelName=${encodeURIComponent(modelName)}${effort}`,
       { method: 'GET',
         headers: getHeaders()
         
