@@ -18,12 +18,12 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
+      <div className="mx-auto flex max-w-7xl min-w-0 flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <Link to="/" className="text-lg font-semibold tracking-tight text-white">
           PromptHub
         </Link>
 
-        <nav className="flex flex-wrap items-center gap-2">
+        <nav className="flex min-w-0 flex-wrap items-center gap-2">
           {isAuthenticated && links.map(({ to, label }) => {
             const isActive = pathname === to
             return (

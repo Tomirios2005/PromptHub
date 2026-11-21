@@ -21,22 +21,21 @@ function PrivateRoute({ children }: { children: ReactNode }) {
 function App() {
  
   return (
-  <>
-  
-
   <BrowserRouter>
       <AuthProvider>
+          <div className="flex min-h-screen flex-col overflow-x-hidden bg-slate-950">
           <Header />
+          <main className="min-w-0 flex-1">
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
             <Route path="/prompts" element={<PrivateRoute><AllPrompts /></PrivateRoute>} />
           </Routes>
+          </main>
+          </div>
       </AuthProvider>
     </BrowserRouter>
-
-  </>
   )
 
   

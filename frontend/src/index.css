@@ -9,9 +9,24 @@
   body {
     @apply bg-slate-950 text-slate-100 antialiased;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   #root {
     min-height: 100vh;
+    overflow-x: hidden;
   }
+}
+
+.prose {
+  overflow-wrap: anywhere;
+}
+
+.prose pre,
+.prose code {
+  max-width: 100%;
+}
+
+.prose pre {
+  overflow-x: auto;
 }

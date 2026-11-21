@@ -46,7 +46,7 @@ export function PromptsContextProvider({ children }: { children: ReactNode }) {
   const [results, setResults] = useState<ModelResult[]>([]);
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [currentPrompt, setCurrentPrompt] = useState<string>('');
-  const MODELS = ['llama-3.1-8b-instant', 'llama-3.3-70b-versatile', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'groq/compound', 'groq/compound-mini']
+  const MODELS = ['openai/gpt-oss-20b', 'openai/gpt-oss-120b', 'qwen/qwen3.8-27b']
 
    const handleSubmit = async (prompt: string) => {
     const normalized = prompt.trim();
