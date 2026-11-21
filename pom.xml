@@ -64,10 +64,6 @@
             <scope>compile</scope>
         </dependency>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> deploy
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
