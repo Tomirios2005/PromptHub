@@ -28,7 +28,7 @@ export default function ResultsGrid({ results }: Props) {
           {r.error && <p className="text-red-400">{r.error}</p>}
 
           {r.response && (
-            <div className="max-w-full space-y-4 overflow-x-auto break-words text-slate-100 prose prose-invert">
+            <div className="max-w-full space-y-4 break-words text-slate-100 prose prose-invert">
               <ReactMarkdown>{r.response}</ReactMarkdown>
             </div>
           )}
