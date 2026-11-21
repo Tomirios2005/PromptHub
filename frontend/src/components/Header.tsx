@@ -17,54 +17,40 @@ export default function Header() {
   ]
 
   return (
-    <header style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '0 1.5rem',
-      height: '56px',
-      borderBottom: '0.5px solid var(--color-border-tertiary)',
-      background: 'var(--color-background-primary)',
-    }}>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '15px', fontWeight: 500 }}>
-        PromptHub
-      </span>
-      <nav style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
-        {isAuthenticated && links.map(({ to, label }) => (
-          <Link
-            key={to}
-            to={to}
-            style={{
-              fontSize: '14px',
-              padding: '6px 14px',
-              borderRadius: 'var(--border-radius-md)',
-              textDecoration: 'none',
-              color: pathname === to ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-              background: pathname === to ? 'var(--color-background-secondary)' : 'transparent',
-              fontWeight: pathname === to ? 500 : 400,
-            }}
-          >
-            {label}
-          </Link>
-        ))}
-        {isAuthenticated && (
-          <button
-            onClick={handleLogout}
-            style={{
-              fontSize: '14px',
-              padding: '6px 14px',
-              borderRadius: 'var(--border-radius-md)',
-              border: '0.5px solid var(--color-border-secondary)',
-              background: 'transparent',
-              color: 'var(--color-text-secondary)',
-              cursor: 'pointer',
-              marginLeft: '8px',
-            }}
-          >
-            Cerrar sesión
-          </button>
-        )}
-      </nav>
+    <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl min-w-0 flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <Link to="/" className="text-lg font-semibold tracking-tight text-white">
+          PromptHub
+        </Link>
+
+        <nav className="flex min-w-0 flex-wrap items-center gap-2">
+          {isAuthenticated && links.map(({ to, label }) => {
+            const isActive = pathname === to
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`rounded-2xl px-4 py-2 text-sm font-medium transition ${
+                  isActive
+                    ? 'bg-slate-800 text-white shadow-sm shadow-cyan-500/10'
+                    : 'text-slate-400 hover:bg-slate-900 hover:text-white'
+                }`}
+              >
+                {label}
+              </Link>
+            )
+          })}
+
+          {isAuthenticated && (
+            <button
+              onClick={handleLogout}
+              className="rounded-2xl border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-300 transition hover:border-slate-500 hover:text-white"
+            >
+              Cerrar sesión
+            </button>
+          )}
+        </nav>
+      </div>
     </header>
   )
 }
