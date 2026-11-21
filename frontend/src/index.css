@@ -4,17 +4,17 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-slate-950 text-slate-100 antialiased;
-    min-height: 100vh;
-    overflow-x: hidden;
+    min-height: 100dvh;
+    overflow-x: clip;
   }
 
   #root {
-    min-height: 100vh;
-    overflow-x: hidden;
+    min-height: 100dvh;
   }
 }
 
@@ -29,4 +29,5 @@
 
 .prose pre {
   overflow-x: auto;
+  overflow-y: hidden;
 }

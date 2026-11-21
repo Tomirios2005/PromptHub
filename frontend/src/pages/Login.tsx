@@ -14,7 +14,7 @@ export default function Login() {
   }
 
   return (
-    <div className="relative min-h-screen bg-slate-950 text-white flex items-center justify-center px-4 py-10">
+    <div className="relative flex flex-1 items-center justify-center overflow-hidden bg-slate-950 px-4 py-10 text-white">
       <div className="absolute -top-16 -left-16 h-40 w-40 rounded-full bg-cyan-500/20 blur-3xl" />
       <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-violet-500/20 blur-3xl" />
       <div className="relative w-full max-w-md rounded-4xl border border-white/10 bg-slate-950/90 p-10 shadow-2xl shadow-slate-950/40 backdrop-blur-xl">

@@ -6,7 +6,7 @@ export default function Home() {
   const { handleSubmit, results } = usePrompts()
 
   return (
-    <div className="overflow-x-hidden bg-slate-950 text-white">
+    <div className="bg-slate-950 text-white">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-10 overflow-hidden rounded-4xl border border-white/10 bg-slate-900/80 p-6 shadow-2xl shadow-slate-950/20 backdrop-blur-xl sm:p-8">
           <div className="text-center">

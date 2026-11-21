@@ -23,9 +23,9 @@ function App() {
   return (
   <BrowserRouter>
       <AuthProvider>
-          <div className="flex min-h-screen flex-col overflow-x-hidden bg-slate-950">
+          <div className="flex min-h-dvh flex-col bg-slate-950">
           <Header />
-          <main className="min-w-0 flex-1">
+          <main className="flex min-w-0 flex-1 flex-col">
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/auth/callback" element={<AuthCallback />} />
